@@ -1,35 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-	<title>My GitHub Page</title>
+    <meta charset="UTF-8">
+    <title>URLパラメータ表示</title>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>Welcome to my GitHub Page.</p>
-    <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScsyaXyXRCmU5qwcQ__mKber23DgNlKujbjr5KTZFeI6HX2ng/formResponse" method="POST" id="mG61Hd" name="myForm" target="dummyIframe">
-        <input type="hidden" class="form-control" id="entry.908279726" name="entry.908279726" readonly="">
-        <input type="hidden" class="form-control" id="entry.961502424" name="entry.961502424" readonly="">
-        <div id="greeting"></div>下記の内容を確認(誓約)の上、出発報告をお願いします。
-        <div>
-            <input class="btn btn-success" id="submit-btn" type="button" value="出発する" onclick="submitForm()">
-        </div>
-    </form>
-    <iframe name="dummyIframe" style="display:none;"></iframe>
-    <script>
-        // JavaScript function to enable the submit button and set hidden input values
-        function enableSubmit() {
-            document.getElementById('submit-btn').disabled = false;
-            document.getElementById('entry.908279726').value = "some value";
-            document.getElementById('entry.961502424').value = "another value";
-        }
-
-        // JavaScript function to submit the form
-        function submitForm() {
-            document.myForm.submit();
-        }
-
-        // Call enableSubmit to enable the button
-        enableSubmit();
-    </script>
+    <h1>URLパラメータの表示</h1>
+    <div id="params"></div>
+    <script src="script.js"></script>
 </body>
 </html>
