@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("Script loaded"); // デバッグ用ログ
+
     // URLSearchParamsを使ってURLパラメータを解析
     const urlParams = new URLSearchParams(window.location.search);
+    console.log("URL Parameters:", urlParams.toString()); // デバッグ用ログ
 
     // パラメータを取得
     const keyParam = urlParams.get('key');
@@ -30,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const todayStr = formatDate(today);
     const yesterdayStr = formatDate(yesterday);
 
+    console.log("Today:", todayStr); // デバッグ用ログ
+    console.log("Yesterday:", yesterdayStr); // デバッグ用ログ
+
     // 複数のエラーチェックを行う
     if (!keyParam) {
         errorMessage = 'keyパラメータがありません。';
@@ -40,14 +46,19 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         // keyパラメータの先頭8桁を取得
         const datePart = keyParam.slice(0, 8);
+        console.log("Date part from keyParam:", datePart); // デバッグ用ログ
         if (datePart !== todayStr && datePart !== yesterdayStr) {
             errorMessage = '勤怠報告期日が超えています。メール送信から報告してください。';
         }
     }
 
-    // エラーメッセージが設定されている場合、エラーページにリダイレクト
+    console.log("Error Message:", errorMessage); // デバッグ用ログ
+
+    // エラーメッセージが設定されている場合、エラーメッセージを表示
     if (errorMessage) {
-        window.location.href = `error.html?message=${encodeURIComponent(errorMessage)}`;
+        const errorContainer = document.getElementById('error-container');
+        errorContainer.style.display = 'block';
+        errorContainer.innerText = errorMessage;
     } else {
         // 入力フォームを表示
         document.getElementById('input-form').style.display = 'block';
