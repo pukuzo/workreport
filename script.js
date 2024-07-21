@@ -54,11 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log("Error Message:", errorMessage); // デバッグ用ログ
 
-    // エラーメッセージが設定されている場合、エラーメッセージを表示
+    // エラーメッセージが設定されている場合、エラーページにリダイレクト
     if (errorMessage) {
-        const errorContainer = document.getElementById('error-container');
-        errorContainer.style.display = 'block';
-        errorContainer.innerText = errorMessage;
+        console.log("Redirecting to error page with message:", errorMessage); // デバッグ用ログ
+        window.location.href = `error.html?message=${encodeURIComponent(errorMessage)}`;
     } else {
         // 入力フォームを表示
         document.getElementById('input-form').style.display = 'block';
