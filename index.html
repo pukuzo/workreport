@@ -34,34 +34,41 @@
                         
                         <div id="work-date" class="mb-3"></div>
                         
-                        <div class="row mb-3">
-                            <label for="start" class="col-form-label col-sm-2">開始時間:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control short-input" id="start" name="entry.1957891779" maxlength="4" placeholder="例 0900">
-                                <div id="start-error" class="error-message">000～2359（時分）の値を入力してください。</div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="end" class="col-form-label col-sm-2">終了時間:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control short-input" id="end" name="entry.75244311" maxlength="4" placeholder="例 1700">
-                                <div id="end-error" class="error-message">000～2359（時分）の値を入力してください。</div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="break" class="col-form-label col-sm-2">休憩時間:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control short-input" id="break" name="entry.476290179" maxlength="4" placeholder="例 0100">
-                                <div id="break-error" class="error-message">000～2359（時分）の値を入力してください。</div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="late-night-break" class="col-form-label col-sm-2">深夜休憩時間:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control short-input" id="late-night-break" name="entry.968644567" maxlength="4" placeholder="例 0100">
-                                <div id="late-night-break-error" class="error-message">000～2359（時分）の値を入力してください。</div>
-                            </div>
-                        </div>
+<!-- 開始時間 -->
+<div class="row mb-3">
+    <label for="start" class="col-form-label col-sm-2">開始時間:</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control short-input" id="start" name="entry.1957891779" maxlength="4" placeholder="例 0900" pattern="\d{3,4}" inputmode="numeric">
+        <div id="start-error" class="text-danger" style="display:none;">000～2359（時分）の値を入力してください。</div>
+    </div>
+</div>
+
+<!-- 終了時間 -->
+<div class="row mb-3">
+    <label for="end" class="col-form-label col-sm-2">終了時間:</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control short-input" id="end" name="entry.75244311" maxlength="4" placeholder="例 1700" pattern="\d{3,4}" inputmode="numeric">
+        <div id="end-error" class="text-danger" style="display:none;">000～2359（時分）の値を入力してください。</div>
+    </div>
+</div>
+
+<!-- 休憩時間 -->
+<div class="row mb-3">
+    <label for="break" class="col-form-label col-sm-2">休憩時間:</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control short-input" id="break" name="entry.476290179" maxlength="4" placeholder="例 0100" pattern="\d{3,4}" inputmode="numeric">
+        <div id="break-error" class="text-danger" style="display:none;">000～2359（時分）の値を入力してください。</div>
+    </div>
+</div>
+
+<!-- 深夜休憩時間 -->
+<div class="row mb-3">
+    <label for="late-night-break" class="col-form-label col-sm-2">深夜休憩時間:</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control short-input" id="late-night-break" name="entry.968644567" maxlength="4" placeholder="例 0100" pattern="\d{3,4}" inputmode="numeric">
+        <div id="late-night-break-error" class="text-danger" style="display:none;">000～2359（時分）の値を入力してください。</div>
+    </div>
+</div>
                         <div class="d-grid">
                             <button type="button" class="btn btn-success" id="submit-btn" onclick="validateForm()">報告する</button>
                         </div>
