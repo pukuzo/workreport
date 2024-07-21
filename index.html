@@ -2,11 +2,81 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>URLパラメータ表示</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勤怠報告</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .short-input {
+            width: 80px; /* 入力フィールドの幅を狭める */
+            text-align: right; /* テキストを右揃えにする */
+        }
+        .error-message {
+            color: red; /* エラーメッセージを赤字にする */
+            font-size: 0.875em; /* フォントサイズを小さくする */
+            display: none; /* 初期状態では非表示 */
+        }
+        #result-message {
+            display: none; /* 初期状態では非表示 */
+        }
+    </style>
 </head>
 <body>
-    <h1>URLパラメータの表示</h1>
-    <div id="params"></div>
+    <div class="container my-5">
+        <h1 class="mb-4">勤怠報告</h1>
+        <div id="params"></div>
+        <div id="formWrapper">
+            <p id="name-display">さん</p>
+            <p>お疲れ様でした。勤怠報告をお願いします。</p> 
+            <div class="card" id="input-form">
+                <div class="card-body">
+                    <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfKCcNouZWQ2zV_0fiV4AzYckFkT_xZtB3IfB0QXoK47YNeug/formResponse" method="POST" id="myForm" name="myForm" target="dummyIframe">
+                        <input type="hidden" id="key" name="entry.114451755" value="your_key_here">
+                        
+                        <div id="work-date" class="mb-3"></div>
+                        
+                        <div class="row mb-3">
+                            <label for="start" class="col-form-label col-sm-2">開始時間:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control short-input" id="start" name="entry.1957891779" maxlength="4" placeholder="例 0900">
+                                <div id="start-error" class="error-message">000～2359（時分）の値を入力してください。</div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="end" class="col-form-label col-sm-2">終了時間:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control short-input" id="end" name="entry.75244311" maxlength="4" placeholder="例 1700">
+                                <div id="end-error" class="error-message">000～2359（時分）の値を入力してください。</div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="break" class="col-form-label col-sm-2">休憩時間:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control short-input" id="break" name="entry.476290179" maxlength="4" placeholder="例 0100">
+                                <div id="break-error" class="error-message">000～2359（時分）の値を入力してください。</div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="late-night-break" class="col-form-label col-sm-2">深夜休憩時間:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control short-input" id="late-night-break" name="entry.968644567" maxlength="4" placeholder="例 0100">
+                                <div id="late-night-break-error" class="error-message">000～2359（時分）の値を入力してください。</div>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="button" class="btn btn-success" id="submit-btn" onclick="validateForm()">報告する</button>
+                        </div>
+                        <iframe name="dummyIframe" style="display:none;"></iframe>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="thxMessage" style="display:none;">
+            <p id="time"></p>
+        </div>
+        <div id="result-message" class="alert alert-success mt-4"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
