@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // keyパラメータの先頭8桁を取得
         const datePart = keyParam.slice(0, 8);
         if (datePart !== todayStr && datePart !== yesterdayStr) {
-            errorMessage = 'keyパラメータの日付部分が今日または昨日の日付ではありません。';
+            errorMessage = '勤怠報告期日が超えています。メール送信から報告してください。';
         }
     }
 
