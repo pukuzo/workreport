@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>勤怠報告エラー</title>
+</head>
+<body>
+    <h1>勤怠報告エラー</h1>
+    <div id="error-message"></div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // エラーメッセージを取得して表示
+        const errorMessage = urlParams.get('message');
+        document.getElementById('error-message').textContent = errorMessage || 'パラメータが正しくありません。';
+    </script>
+</body>
+</html>
