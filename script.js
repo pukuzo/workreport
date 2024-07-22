@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // keyパラメータの先頭8桁を取得
         const datePart = keyParam.slice(0, 8);
         if (datePart !== todayStr && datePart !== yesterdayStr) {
-            errorMessage = '勤怠報告期日が超えています。';
+            errorMessage = '勤怠報告期日が超えています。メール送信から報告してください。';
         }
     }
 
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (isValid) {
             // フォームを送信
-            document.getElementById('myForm').submit();
+            document.myForm.submit();
 
             // フォームを非表示にして感謝メッセージを表示
             document.getElementById('formWrapper').style.display = 'none';
@@ -116,6 +116,5 @@ document.addEventListener('DOMContentLoaded', function () {
             const nowTime = `${nowHour}時${nowMinutes}分に出発報告を承りました。`;
             document.getElementById("time").innerHTML = nowTime;
         }
-        return false; // フォーム送信を中断
     }
 });
