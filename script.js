@@ -8,15 +8,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const endParam = urlParams.get('end');
     const breakParam = urlParams.get('break');
     const lateNightBreakParam = urlParams.get('late_night_break');
-    const nameParam = urlParams.get('name');
+    const nameParam = urlParams.get('name'); // 新しいパラメータ
 
     // エラーメッセージを保持する変数
     let errorMessage = '';
 
-    // 今日と3日前の日付を取得
+    // 今日と昨日の日付を取得
     const today = new Date();
-    const threeDaysAgo = new Date(today);
-    threeDaysAgo.setDate(today.getDate() - 3);
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
 
     // 日付をyyyyMMdd形式に変換する関数
     function formatDate(date) {
@@ -26,18 +26,22 @@ document.addEventListener('DOMContentLoaded', function () {
         return `${year}${month}${day}`;
     }
 
-    // 今日と3日前のyyyyMMdd形式の日付
+    // 今日と昨日のyyyyMMdd形式の日付
     const todayStr = formatDate(today);
-    const threeDaysAgoStr = formatDate(threeDaysAgo);
+    const yesterdayStr = formatDate(yesterday);
 
-    // パラメータが揃っているかをチェック
-    if (!keyParam || !startParam || !endParam || !breakParam || !lateNightBreakParam || !nameParam) {
-        errorMessage = 'すべてのパラメータが揃っていません。';
+    // 複数のエラーチェックを行う
+    if (!keyParam) {
+        errorMessage = 'keyパラメータがありません。';
+    } else if (keyParam.length !== 10) {
+        errorMessage = 'keyパラメータの長さが10文字ではありません。';
+    } else if (!/^[a-zA-Z0-9]+$/.test(keyParam)) {
+        errorMessage = 'keyパラメータには英数字のみを使用してください。';
     } else {
         // keyパラメータの先頭8桁を取得
         const datePart = keyParam.slice(0, 8);
-        if (datePart < threeDaysAgoStr) {
-            errorMessage = '勤怠報告期限を過ぎています。';
+        if (datePart !== todayStr && datePart !== yesterdayStr) {
+            errorMessage = '勤怠報告期日が超えています。';
         }
     }
 
@@ -64,14 +68,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // ここでKeyの先頭8桁を取得して表示
-        const keyValue = document.getElementById('key').value;
+        const keyValue = document.getElementById('key').value; // 例: "20230701XXXX"
         if (keyValue.length >= 8) {
             const year = keyValue.substring(0, 4);
             const month = keyValue.substring(4, 6);
             const day = keyValue.substring(6, 8);
             const date = new Date(`${year}-${month}-${day}`);
             const dayOfWeek = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
-            const formattedDate = `就業日 ${year}年${parseInt(month)}月${parseInt(day)}日 (${dayOfWeek})`;
+            const formattedDate = `就業日 ${year}年${parseInt(month)}月${parseInt(day)}日 (${dayOfWeek})`; // 日付の表示
             document.getElementById('work-date').innerText = formattedDate;
         }
     }
@@ -99,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (isValid) {
             // フォームを送信
-            document.myForm.submit();
+            document.getElementById('myForm').submit();
 
             // フォームを非表示にして感謝メッセージを表示
             document.getElementById('formWrapper').style.display = 'none';
@@ -112,5 +116,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const nowTime = `${nowHour}時${nowMinutes}分に出発報告を承りました。`;
             document.getElementById("time").innerHTML = nowTime;
         }
+        return false; // フォーム送信を中断
     }
 });
