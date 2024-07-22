@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 複数のエラーチェックを行う
     if (!keyParam || !startParam || !endParam || !breakParam || !lateNightBreakParam || !nameParam) {
-        errorMessage = 'すべてのパラメータが揃っていません。';
+        errorMessage = '勤怠報告を受け付けることができませんでした。下の「メールを送信する」ボタンから勤怠報告をお願いします。';
     } else {
         // keyパラメータの先頭8桁を取得
         const datePart = keyParam.slice(0, 8);
