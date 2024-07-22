@@ -12,7 +12,7 @@
 <body>
     <div class="container my-5">
         <h1 class="mb-4">LeafNxt勤怠報告エラー</h1>
-        <div class="card" id="input-form" style="display: none;">
+        <div class="card" id="input-form">
             <div class="card-body">
                 <div id="error-message"></div>
                 <!-- メール送信ボタンを中央揃えにする -->
@@ -26,6 +26,19 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js.bk"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // URLSearchParamsを使ってURLパラメータを解析
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
+
+            // エラーメッセージが存在する場合、表示する
+            if (message) {
+                document.getElementById('error-message').innerText = decodeURIComponent(message);
+                document.getElementById('input-form').style.display = 'block'; // フォームを表示
+            }
+        });
+    </script>
 </body>
 </html>
