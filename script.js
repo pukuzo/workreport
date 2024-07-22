@@ -31,17 +31,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const yesterdayStr = formatDate(yesterday);
 
     // 複数のエラーチェックを行う
-    if (!keyParam) {
-        errorMessage = 'keyパラメータがありません。';
-    } else if (keyParam.length !== 10) {
-        errorMessage = 'keyパラメータの長さが10文字ではありません。';
-    } else if (!/^[a-zA-Z0-9]+$/.test(keyParam)) {
-        errorMessage = 'keyパラメータには英数字のみを使用してください。';
+    if (!keyParam || !startParam || !endParam || !breakParam || !lateNightBreakParam || !nameParam) {
+        errorMessage = 'すべてのパラメータが揃っていません。';
     } else {
         // keyパラメータの先頭8桁を取得
         const datePart = keyParam.slice(0, 8);
         if (datePart !== todayStr && datePart !== yesterdayStr) {
-            errorMessage = '勤怠報告期日が超えています。メール送信から報告してください。';
+            errorMessage = '勤怠報告期日が超えています。';
         }
     }
 
@@ -103,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (isValid) {
             // フォームを送信
-            document.myForm.submit();
+            document.getElementById('myForm').submit();
 
             // フォームを非表示にして感謝メッセージを表示
             document.getElementById('formWrapper').style.display = 'none';
@@ -116,5 +112,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const nowTime = `${nowHour}時${nowMinutes}分に出発報告を承りました。`;
             document.getElementById("time").innerHTML = nowTime;
         }
+        return false; // フォーム送信を中断
     }
 });
